@@ -459,6 +459,9 @@
                 <!-- Guest Name Box - Highlighted -->
                 <div class="mb-8 relative group cursor-default">
                     <div class="absolute inset-0 bg-white/50 blur-xl rounded-full transform scale-x-150 scale-y-75 opacity-70"></div>
+                    <p class="text-[#8B0000] text-sm md:text-base uppercase tracking-wider mb-2 relative font-semibold">
+                        Công Ty Cổ Phần Tư Vấn Xây Dựng ÂU LẠC
+                    </p>
                     <p class="text-primary text-lg italic mb-2 relative font-medium">Trân trọng kính mời:</p>
                     <h3 id="guest-name-display" class="font-script text-5xl md:text-7xl text-[#D50000] py-2 relative drop-shadow-md transform group-hover:scale-105 transition duration-500 font-bold leading-tight">
                         Quý Đại Biểu
@@ -565,7 +568,7 @@
         // --- FLOWER RAIN EFFECT (EMOJIS) ---
         function createFlowerRain() {
             const container = document.body; // Hoa rơi toàn màn hình
-            const flowerCount = 70; // Số lượng hoa (tăng từ 35)
+            const flowerCount = 45; // Số lượng hoa (giảm để đỡ rối + nhẹ hơn)
             const flowers = ['🌸', '🌼', '🌺', '💮', '🏵️', '🌹', '🌷', '🌻'];
 
             for (let i = 0; i < flowerCount; i++) {
@@ -578,8 +581,13 @@
                 // Random vị trí, kích thước và tốc độ
                 flower.style.left = Math.random() * 100 + 'vw';
                 flower.style.fontSize = (Math.random() * 20 + 20) + 'px'; // 20-40px
-                flower.style.animationDuration = (Math.random() * 5 + 5) + 's'; // 5-10s
-                flower.style.animationDelay = (Math.random() * 5) + 's'; // Delay ngẫu nhiên
+                // Rơi chậm hơn: tăng thời gian rơi, sway riêng cho tự nhiên
+                const fallDuration = (Math.random() * 8 + 10); // 10-18s
+                const swayDuration = (Math.random() * 4 + 6);  // 6-10s
+                const delay = (Math.random() * 6);            // 0-6s
+
+                flower.style.animationDuration = `${fallDuration}s, ${swayDuration}s`;
+                flower.style.animationDelay = `${delay}s, ${delay}s`; // delay đồng bộ cho 2 animation
                 
                 container.appendChild(flower);
             }
