@@ -48,14 +48,124 @@
             overflow-y: auto;
         }
 
-        .curtain-decoration {
+        /* --- DOOR OPENING EFFECT --- */
+        #door-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9998;
+            perspective: 2000px;
+            pointer-events: none;
+        }
+
+        .door {
             position: absolute;
             top: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, #8B0000 0%, #D32F2F 30%, #B71C1C 60%, #5D0000 100%);
+            transition: transform 2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            transform-style: preserve-3d;
+            overflow: hidden;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.5);
+        }
+
+        .door::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 150px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23880E4F" fill-opacity="0.8" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>');
-            background-size: cover;
-            background-repeat: no-repeat;
+            height: 100%;
+            background: url("https://www.transparenttextures.com/patterns/stardust.png");
+            opacity: 0.3;
+        }
+
+        .door-left {
+            left: 0;
+            border-right: 3px solid #FFD700;
+            transform-origin: left center;
+        }
+
+        .door-right {
+            right: 0;
+            border-left: 3px solid #FFD700;
+            transform-origin: right center;
+        }
+
+        .door-left.open {
+            transform: rotateY(-120deg);
+        }
+
+        .door-right.open {
+            transform: rotateY(120deg);
+        }
+
+        /* Door Decorations (Handle) */
+        .door-decoration {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+        }
+
+        .door-left .door-decoration {
+            right: 15%;
+        }
+
+        .door-right .door-decoration {
+            left: 15%;
+        }
+
+        .door-decoration svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Door Ornaments */
+        .door-ornament {
+            position: absolute;
+            width: 100%;
+            height: 200px;
+            pointer-events: none;
+        }
+
+        .door-ornament.top {
+            top: 0;
+        }
+
+        .door-ornament.bottom {
+            bottom: 0;
+            transform: rotate(180deg);
+        }
+
+        /* Light beam effect when doors open */
+        #light-beam {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(255,215,0,0.4) 0%, transparent 70%);
+            z-index: 9997;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            pointer-events: none;
+        }
+
+        #light-beam.active {
+            opacity: 1;
+        }
+
+        .curtain-decoration {
+            display: none;
         }
 
         .open-btn {
@@ -262,6 +372,87 @@
 </head>
 <body>
 
+    <!-- LIGHT BEAM EFFECT -->
+    <div id="light-beam"></div>
+
+    <!-- DOOR OPENING EFFECT -->
+    <div id="door-container">
+        <div class="door door-left" id="door-left">
+            <!-- Left Door Text Center -->
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; width: 500px; height: 300px;">
+                <svg viewBox="0 0 400 200" style="width: 100%; height: 100%; overflow: visible;" preserveAspectRatio="xMidYMid meet">
+                    <text x="200" y="130" font-size="110" text-anchor="middle" fill="#FFD700" font-weight="bold" style="text-shadow: 3px 3px 6px rgba(0,0,0,0.6)" font-family="'Dancing Script', cursive">ÂU</text>
+                </svg>
+            </div>
+            <!-- Left Door Decoration (Handle) -->
+            <div class="door-decoration">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="15" fill="none" stroke="#FFD700" stroke-width="3"/>
+                    <circle cx="50" cy="50" r="8" fill="#FFD700"/>
+                </svg>
+            </div>
+            <!-- Ornamental Pattern Top -->
+            <div class="door-ornament top">
+                <svg viewBox="0 0 400 200" style="width:100%;height:100%">
+                    <path d="M0,0 Q100,50 200,0 T400,0" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.5"/>
+                    <path d="M0,30 Q100,80 200,30 T400,30" fill="none" stroke="#FFD700" stroke-width="1.5" opacity="0.4"/>
+                    <circle cx="50" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="150" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="250" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="350" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                </svg>
+            </div>
+            <!-- Ornamental Pattern Bottom -->
+            <div class="door-ornament bottom">
+                <svg viewBox="0 0 400 200" style="width:100%;height:100%">
+                    <path d="M0,0 Q100,50 200,0 T400,0" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.5"/>
+                    <path d="M0,30 Q100,80 200,30 T400,30" fill="none" stroke="#FFD700" stroke-width="1.5" opacity="0.4"/>
+                    <circle cx="50" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="150" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="250" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="350" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                </svg>
+            </div>
+        </div>
+        <div class="door door-right" id="door-right">
+            <!-- Right Door Text Center -->
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; width: 500px; height: 300px;">
+                <svg viewBox="0 0 400 200" style="width: 100%; height: 100%; overflow: visible;" preserveAspectRatio="xMidYMid meet">
+                    <text x="200" y="130" font-size="110" text-anchor="middle" fill="#FFD700" font-weight="bold" style="text-shadow: 3px 3px 6px rgba(0,0,0,0.6)" font-family="'Dancing Script', cursive">LẠC</text>
+                </svg>
+            </div>
+            <!-- Right Door Decoration (Handle) -->
+            <div class="door-decoration">
+                <svg viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="15" fill="none" stroke="#FFD700" stroke-width="3"/>
+                    <circle cx="50" cy="50" r="8" fill="#FFD700"/>
+                </svg>
+            </div>
+            <!-- Ornamental Pattern Top -->
+            <div class="door-ornament top">
+                <svg viewBox="0 0 400 200" style="width:100%;height:100%">
+                    <path d="M0,0 Q100,50 200,0 T400,0" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.5"/>
+                    <path d="M0,30 Q100,80 200,30 T400,30" fill="none" stroke="#FFD700" stroke-width="1.5" opacity="0.4"/>
+                    <circle cx="50" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="150" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="250" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="350" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                </svg>
+            </div>
+            <!-- Ornamental Pattern Bottom -->
+            <div class="door-ornament bottom">
+                <svg viewBox="0 0 400 200" style="width:100%;height:100%">
+                    <path d="M0,0 Q100,50 200,0 T400,0" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.5"/>
+                    <path d="M0,30 Q100,80 200,30 T400,30" fill="none" stroke="#FFD700" stroke-width="1.5" opacity="0.4"/>
+                    <circle cx="50" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="150" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="250" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                    <circle cx="350" cy="40" r="8" fill="#FFD700" opacity="0.6"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+
     <!-- 1. WELCOME SCREEN -->
     <div id="welcome-screen">
         <div class="curtain-decoration"></div>
@@ -290,7 +481,7 @@
             </div>
             
             <button class="open-btn relative overflow-hidden group" onclick="openInvitation()">
-                <span class="relative z-10">Mở Thiệp Xuân</span>
+                <span class="relative z-10">Mở Cửa Đón Xuân</span>
                 <div class="absolute inset-0 bg-white/30 transform -translate-x-full skew-x-12 group-hover:animate-shine"></div>
             </button>
             
@@ -536,6 +727,7 @@
             }
             // Cập nhật tên hiển thị trong thiệp
             guestNameDisplay.textContent = guestName;
+            
             // 1. Play Music
             music.play().then(() => {
                 isMusicPlaying = true;
@@ -548,7 +740,23 @@
                 welcomeScreen.style.display = 'none';
             }, 1000);
 
-            // 3. Show Main Content
+            // 2.5. Open the doors with a slight delay for dramatic effect
+            setTimeout(() => {
+                const doorLeft = document.getElementById('door-left');
+                const doorRight = document.getElementById('door-right');
+                const lightBeam = document.getElementById('light-beam');
+                
+                doorLeft.classList.add('open');
+                doorRight.classList.add('open');
+                lightBeam.classList.add('active');
+                
+                // Fade out light beam after doors are fully open
+                setTimeout(() => {
+                    lightBeam.classList.remove('active');
+                }, 2000);
+            }, 800);
+
+            // 3. Show Main Content (after doors start opening)
             mainContent.classList.remove('hidden');
             setTimeout(() => {
                 mainContent.style.opacity = '1';
@@ -562,7 +770,12 @@
                 createGoldDust();
                 // START FLOWER RAIN WITH EMOJIS
                 createFlowerRain();
-            }, 500);
+            }, 1500);
+
+            // 4. Hide doors completely after animation
+            setTimeout(() => {
+                document.getElementById('door-container').style.display = 'none';
+            }, 3500);
         }
 
         // --- FLOWER RAIN EFFECT (EMOJIS) ---
