@@ -27,6 +27,7 @@
             overflow-x: hidden; 
             overflow-y: auto;
             min-height: 100vh;
+            color: #8B0000; /* Màu đỏ đô mặc định cho tất cả text */
         }
 
         /* --- 1. OPENING SCREEN STYLES --- */
@@ -268,8 +269,25 @@
             <!-- Hiệu ứng vòng sáng phía sau nút -->
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-red-500 rounded-full blur-[100px] opacity-40"></div>
             
+            <!-- Logo -->
+            <div class="flex justify-center mb-3">
+                <img src="AULAC.png" alt="Logo Âu Lạc Corp" class="h-16 md:h-20 drop-shadow-lg">
+            </div>
+
             <h1 class="text-white text-xl md:text-2xl font-light mb-2 tracking-[0.4em] uppercase opacity-90 drop-shadow-md">Lời Mời Từ</h1>
-            <h2 class="text-[#FFD700] text-4xl md:text-6xl font-bold mb-10 font-script drop-shadow-lg">Âu Lạc Corp</h2>
+            <h2 class="text-[#FFD700] text-4xl md:text-6xl font-bold mb-6 font-script drop-shadow-lg">ÂU LẠC CORP</h2>
+            
+            <!-- Guest Name Input -->
+            <div class="mb-6 w-full max-w-md mx-auto">
+                <label class="block text-white/90 text-sm mb-2 font-medium">Vui lòng nhập tên để xác nhận khách mời:</label>
+                <input 
+                    type="text" 
+                    id="guest-name-input" 
+                    placeholder="Nhập tên của bạn..."
+                    class="w-full px-4 py-3 rounded-lg bg-white/20 backdrop-blur-md border-2 border-white/40 text-white placeholder-white/60 focus:outline-none focus:border-[#FFD700] focus:ring-2 focus:ring-[#FFD700]/50 transition-all text-center font-medium"
+                    onkeypress="if(event.key === 'Enter') openInvitation()"
+                >
+            </div>
             
             <button class="open-btn relative overflow-hidden group" onclick="openInvitation()">
                 <span class="relative z-10">Mở Thiệp Xuân</span>
@@ -345,8 +363,8 @@
             <!-- Cherry Blossom (Top Left) - Bright & Vivid -->
             <div class="absolute -top-8 -left-8 w-48 h-48 opacity-100 pointer-events-none z-20">
                  <svg viewBox="0 0 200 200" class="drop-shadow-lg">
-                    <path d="M0,50 Q60,40 100,90 T160,100" fill="none" stroke="#3E2723" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M100,90 Q120,60 140,50" fill="none" stroke="#3E2723" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M0,50 Q60,40 100,90 T160,100" fill="none" stroke="#6B0000" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M100,90 Q120,60 140,50" fill="none" stroke="#6B0000" stroke-width="2" stroke-linecap="round"/>
                     <!-- Flowers -->
                     <circle cx="30" cy="50" r="10" fill="#FFCDD2" stroke="#FF5252" stroke-width="0.5"/>
                     <circle cx="30" cy="50" r="3" fill="#B71C1C" />
@@ -367,11 +385,15 @@
 
             <!-- CONTENT -->
             <div class="relative z-20">
+                <!-- Logo in Card -->
+                <div class="flex justify-center mb-4">
+                    <img src="AULAC.png" alt="Logo Âu Lạc Corp" class="h-14 md:h-16 drop-shadow-md">
+                </div>
                 <h1 class="text-xl md:text-2xl font-bold text-primary uppercase tracking-widest mt-6 mb-2">
                     Thiệp Mời Tất Niên
                 </h1>
                 
-                <h2 class="text-3xl md:text-6xl font-black uppercase mb-4 leading-tight relative">
+                <h2 class="text-3xl md:text-6xl font-black uppercase mb-4 leading-tight relative text-[#8B0000]">
                     Mừng Xuân
                 </h2>
 
@@ -389,15 +411,15 @@
                 </div>
 
                 <p class="text-lg md:text-xl text-primary italic mb-6 font-semibold">
-                    Vào ngày 13/02/2026 (Nhằm ngày 26 tháng Chạp Âm Lịch)
+                    Vào Thứ 6 ngày 13/02/2026 (Nhằm ngày 26 tháng Chạp Âm Lịch)
                 </p>
 
                 <!-- Guest Name Box - Highlighted -->
                 <div class="mb-8 relative group cursor-default">
                     <div class="absolute inset-0 bg-white/50 blur-xl rounded-full transform scale-x-150 scale-y-75 opacity-70"></div>
                     <p class="text-primary text-lg italic mb-2 relative font-medium">Trân trọng kính mời:</p>
-                    <h3 class="font-script text-5xl md:text-7xl text-[#D50000] py-2 relative drop-shadow-md transform group-hover:scale-105 transition duration-500 font-bold leading-tight">
-                        Quý Đối Tác
+                    <h3 id="guest-name-display" class="font-script text-5xl md:text-7xl text-[#D50000] py-2 relative drop-shadow-md transform group-hover:scale-105 transition duration-500 font-bold leading-tight">
+                        Quý Đại Biểu
                     </h3>
                 </div>
 
@@ -419,16 +441,16 @@
                                 <span>📍</span> Địa Điểm
                             </h4>
                             <p class="font-bold text-primary text-lg">Công Ty CP TVXD Âu Lạc</p>
-                            <p class="text-sm text-gray-700 mt-1">Khóm Vĩnh Hưng, P. Long Đức, TP. Vĩnh Long</p>
+                            <p class="text-sm text-[#8B0000] mt-1">Khóm Vĩnh Hưng, P. Long Đức, TP. Vĩnh Long</p>
                         </div>
                         <div class="pl-0 md:pl-4">
                             <h4 class="text-[#FF5500] font-bold uppercase text-sm mb-2 flex items-center gap-2">
                                 <span>⏰</span> Thời Gian
                             </h4>
-                            <ul class="text-gray-800 text-sm space-y-2 font-medium">
-                                <li class="flex justify-between border-b border-dashed border-red-100 pb-1"><span>16:00</span> <span>Đón khách & Chụp hình</span></li>
-                                <li class="flex justify-between border-b border-dashed border-red-100 pb-1"><span>16:30</span> <span>Khai mạc & Phát biểu</span></li>
-                                <li class="flex justify-between"><span>17:00</span> <span>Tiệc tối & Nghệ thuật</span></li>
+                            <ul class="text-[#8B0000] text-sm space-y-2 font-medium">
+                                <li class="flex justify-between border-b border-dashed border-red-100 pb-1"><span class="text-[#8B0000]">16:00</span> <span class="text-[#8B0000]">Đón khách & Chụp hình</span></li>
+                                <li class="flex justify-between border-b border-dashed border-red-100 pb-1"><span class="text-[#8B0000]">16:30</span> <span class="text-[#8B0000]">Khai mạc & Phát biểu</span></li>
+                                <li class="flex justify-between"><span class="text-[#8B0000]">17:00</span> <span class="text-[#8B0000]">Tiệc tối & Nghệ thuật</span></li>
                             </ul>
                         </div>
                     </div>
@@ -436,17 +458,12 @@
 
                 <!-- Footer Actions -->
                 <div class="flex flex-col md:flex-row justify-center items-center gap-6 mt-8">
-                    <!-- RSVP Button -->
-                    <button onclick="confirmAttendance(this)" class="group relative px-10 py-4 bg-gradient-to-r from-[#D50000] to-[#B71C1C] text-white font-bold rounded-full overflow-hidden shadow-xl hover:shadow-red-500/60 transition-all border-2 border-[#FFD700]/30 transform hover:-translate-y-1">
+                    <!-- Map Button -->
+                    <a href="https://maps.app.goo.gl/SfDaVQhjVcoNZ4pZ6" target="_blank" rel="noopener noreferrer" class="group relative px-10 py-4 bg-gradient-to-r from-[#D50000] to-[#B71C1C] text-white font-bold rounded-full overflow-hidden shadow-xl hover:shadow-red-500/60 transition-all border-2 border-[#FFD700]/30 transform hover:-translate-y-1">
                         <span class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
                         <span class="relative flex items-center gap-2 text-lg">
-                            <span>📩</span> Xác nhận tham dự
+                            <span>🗺️</span> Xem bản đồ đường đi
                         </span>
-                    </button>
-                    
-                    <!-- Map Link -->
-                    <a href="#" class="text-[#B71C1C] hover:text-[#FF5500] font-bold text-sm border-b-2 border-[#B71C1C]/30 hover:border-[#FF5500] transition pb-1">
-                        🗺️ Xem bản đồ đường đi
                     </a>
                 </div>
 
@@ -461,10 +478,19 @@
         const mainContent = document.getElementById('main-content');
         const cardBody = document.getElementById('card-body');
         const musicBtn = document.getElementById('music-btn');
+        const guestNameInput = document.getElementById('guest-name-input');
+        const guestNameDisplay = document.getElementById('guest-name-display');
         let isMusicPlaying = false;
 
         // --- OPENING ANIMATION ---
         function openInvitation() {
+            // Lấy tên khách mời từ input
+            let guestName = guestNameInput.value.trim();
+            if (guestName === '') {
+                guestName = 'Quý Đại Biểu';
+            }
+            // Cập nhật tên hiển thị trong thiệp
+            guestNameDisplay.textContent = guestName;
             // 1. Play Music
             music.play().then(() => {
                 isMusicPlaying = true;
@@ -529,13 +555,6 @@
                 musicBtn.innerHTML = '🎵';
             }
             isMusicPlaying = !isMusicPlaying;
-        }
-
-        // --- RSVP ACTION ---
-        function confirmAttendance(btn) {
-            btn.innerHTML = '<span class="relative">✅ Đã xác nhận!</span>';
-            btn.classList.remove('from-[#D50000]', 'to-[#B71C1C]');
-            btn.classList.add('bg-green-700', 'border-green-500');
         }
 
         // --- GOLD DUST PARTICLES ---
