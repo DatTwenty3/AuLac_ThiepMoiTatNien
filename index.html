@@ -466,6 +466,46 @@
             }
         }
 
+        /* --- FALLING TEXT EFFECT: "ÂU LẠC" --- */
+        .falling-text {
+            position: fixed;
+            top: -10%;
+            z-index: 20;
+            pointer-events: none;
+            user-select: none;
+            animation-name: text-fall, text-sway, text-rotate;
+            animation-timing-function: linear, ease-in-out, linear;
+            animation-iteration-count: infinite;
+            font-family: 'Dancing Script', cursive;
+            font-weight: bold;
+            font-size: 24px;
+            background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+        }
+
+        @keyframes text-fall {
+            0% { top: -10%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 110%; opacity: 0; }
+        }
+
+        @keyframes text-sway {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(40px); }
+            75% { transform: translateX(-40px); }
+            100% { transform: translateX(0); }
+        }
+
+        @keyframes text-rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 <body>
@@ -791,7 +831,7 @@
                                 <span>⏰</span> Thời Gian
                             </h4>
                             <ul class="text-[#8B0000] text-xs md:text-sm space-y-1 font-medium">
-                                <li class="flex justify-between border-b border-dashed border-red-100 pb-1"><span class="text-[#8B0000]">16:00</span> <span class="text-[#8B0000]">Đón khách & Chụp hình</span></li>
+                                <li class="flex justify-between border-b border-dashed border-red-100 pb-1"><span class="text-[#8B0000]">16:00</span> <span class="text-[#8B0000]">Đón khách & Chụp hình lưu niệm</span></li>
                                 <li class="flex justify-between border-b border-dashed border-red-100 pb-1"><span class="text-[#8B0000]">16:30</span> <span class="text-[#8B0000]">Khai mạc & Phát biểu</span></li>
                                 <li class="flex justify-between"><span class="text-[#8B0000]">17:00</span> <span class="text-[#8B0000]">Tiệc tối & Nghệ thuật</span></li>
                             </ul>
@@ -902,6 +942,8 @@
                 createGoldDust();
                 // START FLOWER RAIN WITH EMOJIS
                 createFlowerRain();
+                // START FALLING TEXT: "ÂU LẠC"
+                createFallingText();
             }, 1500);
 
             // 4. Hide doors completely after animation
@@ -913,8 +955,8 @@
         // --- FLOWER RAIN EFFECT (EMOJIS) ---
         function createFlowerRain() {
             const container = document.body; // Hoa rơi toàn màn hình
-            const flowerCount = 45; // Số lượng hoa (giảm để đỡ rối + nhẹ hơn)
-            const flowers = ['🌸', '🌼', '🌺', '💮', '🏵️', '🌹', '🌷', '🌻', '🏮', '🎊', '🎉', '🧧', '🎆', '✨', '💰', '🍊', '🍑'];
+            const flowerCount = 30; // Số lượng hoa (giảm để đỡ rối + nhẹ hơn)
+            const flowers = ['🌸', '🌼', '🌺', '💮', '🏵️', '🌹', '🌷', '🌻', '🏮', '🎊', '🎉', '🧧', '✨', '💰', '🍊', '🍑'];
 
             for (let i = 0; i < flowerCount; i++) {
                 const flower = document.createElement('div');
@@ -935,6 +977,36 @@
                 flower.style.animationDelay = `${delay}s, ${delay}s`; // delay đồng bộ cho 2 animation
                 
                 container.appendChild(flower);
+            }
+        }
+
+        // --- FALLING TEXT EFFECT: "ÂU LẠC" ---
+        function createFallingText() {
+            const container = document.body;
+            const textCount = 15; // Số lượng chữ rơi
+            const texts = ['Âu Lạc', 'An Khang', 'Thịnh Vượng'];
+
+            for (let i = 0; i < textCount; i++) {
+                const textElement = document.createElement('div');
+                textElement.classList.add('falling-text');
+                
+                // Ngẫu nhiên chọn text
+                textElement.innerText = texts[Math.floor(Math.random() * texts.length)];
+                
+                // Random vị trí, kích thước và tốc độ
+                textElement.style.left = Math.random() * 100 + 'vw';
+                textElement.style.fontSize = (Math.random() * 15 + 20) + 'px'; // 20-35px
+                
+                // Thời gian rơi và hiệu ứng
+                const fallDuration = (Math.random() * 6 + 8);  // 8-14s
+                const swayDuration = (Math.random() * 3 + 5);  // 5-8s
+                const rotateDuration = (Math.random() * 4 + 6); // 6-10s
+                const delay = (Math.random() * 8);             // 0-8s
+
+                textElement.style.animationDuration = `${fallDuration}s, ${swayDuration}s, ${rotateDuration}s`;
+                textElement.style.animationDelay = `${delay}s, ${delay}s, ${delay}s`;
+                
+                container.appendChild(textElement);
             }
         }
 
