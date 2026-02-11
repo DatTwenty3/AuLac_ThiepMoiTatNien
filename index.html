@@ -477,14 +477,18 @@
             animation-timing-function: linear, ease-in-out, linear;
             animation-iteration-count: infinite;
             font-family: 'Dancing Script', cursive;
-            font-weight: bold;
+            font-weight: 900;
             font-size: 24px;
-            background: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #FBF5B7, #AA771C);
+            /* Gradient đỏ đô sang trọng */
+            background: linear-gradient(135deg, #8B0000 0%, #D50000 25%, #FF0000 50%, #D50000 75%, #8B0000 100%);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+            /* Viền vàng nhẹ bao quanh */
+            -webkit-text-stroke: 1px rgba(255, 215, 0, 0.5);
+            /* Shadow đơn giản để tạo độ sâu */
+            filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.4));
         }
 
         @keyframes text-fall {
@@ -955,7 +959,7 @@
         // --- FLOWER RAIN EFFECT (EMOJIS) ---
         function createFlowerRain() {
             const container = document.body; // Hoa rơi toàn màn hình
-            const flowerCount = 30; // Số lượng hoa (giảm để đỡ rối + nhẹ hơn)
+            const flowerCount = 20; // Số lượng hoa (giảm để đỡ rối + nhẹ hơn)
             const flowers = ['🌸', '🌼', '🌺', '💮', '🏵️', '🌹', '🌷', '🌻', '🏮', '🎊', '🎉', '🧧', '✨', '💰', '🍊', '🍑'];
 
             for (let i = 0; i < flowerCount; i++) {
@@ -983,7 +987,7 @@
         // --- FALLING TEXT EFFECT: "ÂU LẠC" ---
         function createFallingText() {
             const container = document.body;
-            const textCount = 15; // Số lượng chữ rơi
+            const textCount = 10; // Số lượng chữ rơi
             const texts = ['Âu Lạc', 'An Khang', 'Thịnh Vượng'];
 
             for (let i = 0; i < textCount; i++) {
@@ -995,7 +999,7 @@
                 
                 // Random vị trí, kích thước và tốc độ
                 textElement.style.left = Math.random() * 100 + 'vw';
-                textElement.style.fontSize = (Math.random() * 15 + 20) + 'px'; // 20-35px
+                textElement.style.fontSize = (Math.random() * 15 + 24) + 'px'; // 24-39px - To hơn để dễ nhìn
                 
                 // Thời gian rơi và hiệu ứng
                 const fallDuration = (Math.random() * 6 + 8);  // 8-14s
